@@ -1,2 +1,3 @@
 global:
   application_name: hello-ci-workflow
+  default_region: us-west-2
