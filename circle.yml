@@ -1,8 +1,12 @@
 machine:
+  python:
+    version: 2.7
   services:
     - docker
 
 dependencies:
+  pre:
+    - sudo pip install awsebcli
   override:
     - docker build -t hello-ci-workflow .
 
@@ -11,3 +15,9 @@ test:
     - npm test
     - docker run -d -p 3000:3000 hello-ci-workflow; sleep 10
     - curl --retry 10 --retry-delay 5 -v http://localhost:3000
+
+deployment:
+  production:
+    branch: master
+    commands:
+      - eb deploy env-production
