@@ -62,7 +62,7 @@
 
 1. 建立一個專案資料夾（這裡以 `hello-ci-workflow` 為例）：
 
-```
+```bash
 $ mkdir hello-ci-workflow
 $ cd hello-ci-workflow
 ```
@@ -71,13 +71,13 @@ $ cd hello-ci-workflow
 
 1. 初始化 Node.js 的環境，填寫一些資料之後會在目錄下產生一個 `package.json` 的檔案：
 
-```
+```bash
 $ npm init
 ```
 
 2. 安裝 Node.js 的 web framework，以 [Express](http://expressjs.com/) 為例：
 
-```
+```bash
 $ npm install express --save
 ```
 
@@ -85,7 +85,7 @@ $ npm install express --save
 
 3. 完成之後，`package.json` 大概會長這個樣子：
 
-```
+```json
 // package.json
 {
   "name": "hello-ci-workflow",
@@ -101,7 +101,7 @@ $ npm install express --save
 
 4. 在 `index.js` 裡寫一段簡單的 Hello World! 的程式：
 
-```
+```javascript
 // index.js
 var express = require('express');
 var app = express();
@@ -122,7 +122,7 @@ var server = app.listen(3000, function () {
 
 5. 執行 `npm start` 或 `node index.js`：
 
-```
+```bash
 $ npm start
 ```
 
@@ -134,13 +134,13 @@ $ npm start
 
 1. 安裝 Node.js 的單元測試，以 [Mocha](http://mochajs.org/) 為例：
 
-```
+```bash
 $ npm install mocha --save-dev
 ```
 
 > `--save-dev`: 寫入 `package.json` 的 devDependencies，正式上線環境不會被安裝。
 
-```
+```json
 // package.json
 {
   "name": "hello-ci-workflow",
@@ -159,7 +159,7 @@ $ npm install mocha --save-dev
 
 2. 根目錄 `test` 資料夾，並新增一個測試腳本 `test.js`：
 
-```
+```bash
 $ mkdir test
 $ cd test
 $ touch test.js
@@ -167,7 +167,7 @@ $ touch test.js
 
 3. 加入一筆錯誤的測試 `assert.equal(1, [1,2,3].indexOf(0))`：
 
-```
+```javascript
 // test/test.js
 var assert = require("assert")
 describe('Array', function(){
@@ -181,7 +181,7 @@ describe('Array', function(){
 
 4. 執行 mocha 測試：
 
-```
+```bash
 $ ./node_modules/.bin/mocha
 
 
@@ -198,14 +198,14 @@ $ ./node_modules/.bin/mocha
 
 5. 將 `test.js` 的測試修正：
 
-```
+```javascript
 // test/test.js
 assert.equal(-1, [1,2,3].indexOf(0));
 ```
 
 6. 再次執行 mocha 測試：
 
-```
+```bash
 $ ./node_modules/.bin/mocha
 
 
@@ -233,13 +233,13 @@ $ ./node_modules/.bin/mocha
 
 1. 初始化 git 環境：
 
-```
+```bash
 $ git init .
 ```
 
 2. 輸入 `git status` 會顯示目前哪些檔案有過更動：
 
-```
+```bash
 $ git status
 On branch master
 
@@ -256,7 +256,7 @@ Untracked files:
 
 3. 將 `node_modules` 加到 `.gitignore` 黑名單，因為這個資料夾是由 `npm install` 自動產生的，不需要放到 GitHub 上：
 
-```
+```yaml
 # .gitignore
 
 # Dependency directory
@@ -266,7 +266,7 @@ node_modules
 
 4. 將更動 commit：
 
-```
+```bash
 $ git add .
 $ git commit -m "first commit"
 ```
@@ -281,7 +281,7 @@ $ git commit -m "first commit"
 
 7. 使用 `git remote add` 將新創建的 GitHub repository 加入到 remote：
 
-```
+```bash
 $ git remote add origin https://github.com/<USER_NAME>/hello-ci-workflow.git
 ```
 
@@ -289,7 +289,7 @@ $ git remote add origin https://github.com/<USER_NAME>/hello-ci-workflow.git
 
 8. 使用 `git push` 將程式碼傳到 GitHub：
 
-```
+```bash
 $ git push -u origin master
 ```
 
@@ -327,7 +327,7 @@ $ git push -u origin master
 
 1. 在專案根目錄底下建立一個 `circle.yml`，並加入 mocha test：
 
-```
+```yaml
 # circle.yml
 machine:
   node:
@@ -340,7 +340,7 @@ test:
 
 2. 完成之後將檔案 push 上 GitHub：
 
-```
+```bash
 $ git add circle.yml
 $ git cimmit "add circle.yml"
 $ git push
@@ -382,7 +382,7 @@ GitHub flow：
 
 1. 為了確保 master 這條主線上的程式碼都是穩定的，所以建議開發者依照不同的功能、建立不同的分支，這裡以 `test-github-flow` 為例，使用 `git branch` 新增分支、然後 `git checkout` 切換分支：
 
-```
+```bash
 $ git branch test-github-flow
 $ git checkout test-github-flow
 ```
@@ -391,13 +391,13 @@ $ git checkout test-github-flow
 
 1. 在 `test.js` 裡加入一行錯誤的測試 `assert.equal(3, [1,2,3].indexOf(5))`：
 
-```
+```javascript
 // test/test.js
 // ...
 assert.equal(3, [1,2,3].indexOf(5));
 ```
 
-```
+```bash
 $ git add test/test.js
 $ git commit -m "add a error test case"
 ```
@@ -406,7 +406,7 @@ $ git commit -m "add a error test case"
 
 1. Push 到 GitHub 的 test-github-flow 分支：
 
-```
+```bash
 $ git push -u origin test-github-flow
 ```
 
@@ -450,7 +450,7 @@ $ git push -u origin test-github-flow
 
 6. 修正 `test.js` 的測試腳本：
 
-```
+```javascript
 // test/test.js
 // ...
 assert.equal(-1, [1,2,3].indexOf(5));
@@ -458,7 +458,7 @@ assert.equal(-1, [1,2,3].indexOf(5));
 
 7. 再次 commit & push：
 
-```
+```bash
 $ git add test/test.js
 $ git commit -m "fix error test case"
 $ git push
@@ -505,7 +505,7 @@ Docker 也是類似的解決方案，不同於 VM 的是，Docker 運行起來�
 
 1. 在專案根目錄底下建立一個 `Dockerfile`：
 
-```
+```yaml
 # Dockerfile
 
 # 從 [Docker Hub](https://hub.docker.com/) 安裝 Node.js image。
@@ -526,7 +526,7 @@ CMD npm start
 
 2. 使用 `docker build` 建構您的 image：
 
-```
+```bash
 $ docker build -t hello-ci-workflow .
 ```
 
@@ -534,7 +534,7 @@ $ docker build -t hello-ci-workflow .
 
 3. 使用 `docker run` 執行您的 image：
 
-```
+```bash
 $ docker run -p 3000:3000 -d hello-ci-workflow
 ```
 
@@ -550,7 +550,7 @@ $ docker run -p 3000:3000 -d hello-ci-workflow
 
 1. 修改 `circle.yml`：
 
-```
+```yaml
 # circle.yml
 machine:
   # 環境改成 docker
@@ -572,7 +572,7 @@ test:
 
 2. Push 更新到 GitHub：
 
-```
+```bash
 $ git add Dockerfile circle.yml
 $ git commit -m "add Docker"
 $ git push
@@ -603,7 +603,7 @@ $ git push
 
 1. 初始化 EB 環境：
 
-```
+```bash
 $ eb init -p docker
 ```
 
@@ -616,7 +616,7 @@ $ eb init -p docker
 
 2. 初始化成功之後，可以使用 `eb create` 快速建立各種不同的環境，例如：development, staging, production；這裡我們以 `env-development` 為例：
 
-```
+```bash
 $ eb create env-development
 ```
 
@@ -626,7 +626,7 @@ $ eb create env-development
 
 4. 使用 `eb open` 前往目前版本的執行結果：
 
-```
+```bash
 $ eb open env-development
 ```
 
@@ -636,7 +636,7 @@ $ eb open env-development
 
 1. 稍微修改 `index.js`：
 
-```
+```javascript
 // index.js
 // ...
 app.get('/', function (req, res) {
@@ -647,7 +647,7 @@ app.get('/', function (req, res) {
 
 2. 執行 `eb deploy` 部署新版本到 AWS Elastic Beanstalk：
 
-```
+```bash
 $ eb deploy env-development
 ```
 
@@ -655,7 +655,7 @@ $ eb deploy env-development
 
 3. 部署完成之後，執行 `eb open` 打開網頁：
 
-```
+```bash
 $ eb open env-development
 ```
 
@@ -667,17 +667,17 @@ $ eb open env-development
 
 1. `git checkout` 將分支切換回主線 master：
 
-```
+```bash
 $ git checkout master
 ```
 
 2. `eb create` 新增一組新的環境，作為產品上線用，命名為 `env-production`：
 
-```
+```bash
 $ eb create env-production
 ```
 
-```
+```bash
 $ eb open env-production
 ```
 
@@ -704,7 +704,7 @@ $ eb open env-production
 
 1. 在 `.elasticbeanstalk` 目錄底下，建立 `config.global.yml`：
 
-```
+```yaml
 # .elasticbeanstalk/config.global.yml
 global:
   application_name: hello-ci-workflow
@@ -713,7 +713,7 @@ global:
 
 2. 修改 `circle.yml`：
 
-```
+```yaml
 # circle.yml
 machine:
   # 安裝 eb 需要 python
@@ -747,7 +747,7 @@ deployment:
 
 3. 接下來馬上來試試看流程，修改 `index.js`：
 
-```
+```javascript
 // index.js
 // ...
 app.get('/', function (req, res) {
@@ -758,7 +758,7 @@ app.get('/', function (req, res) {
 
 4. Commit & Push：
 
-```
+```bash
 $ git add .
 $ git cimmit "test deploy production"
 $ git push
@@ -770,7 +770,7 @@ $ git push
 
 6. 部署成功，`eb open` 打開瀏覽器來看看結果：
 
-```
+```bash
 $ eb open env-production
 ```
 
@@ -829,14 +829,14 @@ Slack 是一款給團隊使用的即時溝通工具，類似的產品還有 [Git
 
 1. 測試 Slack 通知，是否能夠順利運作，新增一條 `test-slack` 分支：
 
-```
+```bash
 $ git branch test-slack
 $ git checkout test-slack
 ```
 
 2. 修改 `index.js`：
 
-```
+```javascript
 // index.js
 // ...
 app.get('/', function (req, res) {
@@ -847,7 +847,7 @@ app.get('/', function (req, res) {
 
 3. Commit & Push：
 
-```
+```bash
 $ git add index.js
 $ git commit -m "index.js: update to test slack"
 $ git push -u origin test-slack
@@ -868,7 +868,7 @@ That’s it! On your next build, you’ll start seeing CircleCI build notificati
 
 `eb open` 打開瀏覽器查看結果，成功自動部署新版本：
 
-```
+```bash
 $ eb open env-production
 ```
 
