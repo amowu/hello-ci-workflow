@@ -342,7 +342,7 @@ test:
 
 ```bash
 $ git add circle.yml
-$ git commit "add circle.yml"
+$ git commit -m "add circle.yml"
 $ git push
 ```
 
@@ -760,7 +760,7 @@ app.get('/', function (req, res) {
 
 ```bash
 $ git add .
-$ git commit "test deploy production"
+$ git commit -m "test deploy production"
 $ git push
 ```
 
